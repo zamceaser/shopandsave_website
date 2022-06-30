@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Shop n Save | Home</title>
+		<script src="https://kit.fontawesome.com/365de3e27b.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="regstyles.css" type="text/css"/>
+		<link rel="icon" href="Images/icon.png" />
+        
+        <!---------google fonts---------->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+       
+	</head>
+
+	<body>
+        <!-------------Header---------------->
+        <div class="logo">
+            <a href="index.php"><img src="Images/logo.png"></a>
+        </div>
+        <!-------------Content---------------->
+        <div class="col-1">
+            <div class="forms1">
+                <form class="modal-content1" method="post" action="register.php">
+                    <div class="container1">
+                        <h1 style="color: black;">Sign Up</h1>
+                        <p style="color: black;">Please fill in this form to create an account.</p>
+                        <hr>
+                        <label for="fname"><b>First Name</b></label>
+                        <input class="txt03" type="text" placeholder="Enter First Name" name="fname" required>
+
+                        <label for="lname"><b>Last Name</b></label>
+                        <input class="txt03" type="text" placeholder="Enter Last Name" name="lname" required>
+
+                        <label for="email"><b>Email</b></label>
+                        <input class="txt02" type="text" placeholder="Enter Email" name="email" required>
+
+                        <label for="psw"><b>Password</b></label>
+                        <input class="txt02" type="password" placeholder="Enter Password" name="psw" required>
+
+                        <label for="psw-repeat"><b>Repeat Password</b></label>
+                        <input class="txt02" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                        </label>
+
+                        <p style="color: black;">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+                        <div class="clearfix1">
+                          <button class="btn03" type="submit" class="signupbtn">Sign Up</button>
+                          <button type="button" class="cancelbtn1" onclick="location.href='index.php';" style="cursor: pointer;">Home</button>
+                          <button type="button" class="cancelbtn1" style="background-color: #024FA1;color: white;margin-left: 4%" onclick="location.href='log.html';" style="cursor: pointer;">Login</button>
+
+                        </div>
+                   </div>
+                   </form>
+            </div>
+
+        </div>
+
+
+	<!-------------Footer---------------->
+    
+        
+
+			
+		
+	</body>
+</html>
+
+
+
+
+
+
+
