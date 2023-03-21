@@ -243,7 +243,7 @@
                         ?>
                     
 				</div>
-                <div style="text-align: right; color:black;}">
+                <div style="text-align: right; color:black;">
                     <a href="#" > SEE MORE</a>
                 </div>
                 

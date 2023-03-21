@@ -167,7 +167,7 @@ session_start();
                 <hr>
 				<h2> Category > Fresh Produce</h2>
 				<div class="row"> 
-					<div class="col-1" name="<?php=$product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
+					<div class="col-1" name="<?php $product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
 						<?php echo '<img src="data:image;base64,'.base64_encode($row[11]['prod_image']).'" >';?> 
 						<h4><?php echo $row[11]['prod_name']; ?></h4>
 						<p>$<?php echo $row[11]['prod_cost']; ?> &nbsp;  </p>
@@ -189,7 +189,7 @@ session_start();
 					</div>
                     
 				</div>
-                <div style="text-align: right; color:black;}">
+                <div style="text-align: right; color:black;">
                     <a href="#" > SEE MORE</a>
                 </div>
                 

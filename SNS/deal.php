@@ -243,7 +243,7 @@
                     <a href="filter.php">FILTER</a>
                 </div>
 				<div class="row"> 
-					<div class="col-1" name="<?php=$product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
+					<div class="col-1" name="<?php $product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
 						<?php echo '<img src="data:image;base64,'.base64_encode($row[0]['prod_image']).'" alt="Rooster Chicken #18">';?> 
 						<h4><?php echo $row[0]['prod_name']; ?></h4>
 						<p>$<?php echo $row[0]['prod_cost']; ?> &nbsp;  <strike> $17.80 </strike></p>
@@ -307,7 +307,7 @@
 					</div>
                     
 				</div>
-                <div style="text-align: right; color:black;}">
+                <div style="text-align: right; color:black;">
                     <a href="#" > SEE MORE</a>
                 </div>
                 
