@@ -50,7 +50,7 @@ session_start();
 					
 				</div>
 				<ul class="nav">
-					<li class="active"> <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
+					<li > <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
 					<li> <a> <img src="Images/locate.png"/>Locations</a>
 						<div class="sub-menu">
 							<ul>
@@ -165,7 +165,7 @@ session_start();
 		<div class="content2">
 			<div class="small-container">
                 <hr>
-				<h2> Categorie > Frozen</h2>
+				<h2> Category > Frozen</h2>
 				<div class="row"> 
 					<div class="col-1" name="<?php=$product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
 						<?php echo '<img src="data:image;base64,'.base64_encode($row[24]['prod_image']).'" >';?> 
@@ -224,7 +224,7 @@ session_start();
 			<div class="col2">
 				<ul>
 					<li><h3>About Market</h3></li>
-					<li><a href="#">About Us</a></li>
+					<li><a href="about1.php">About Us</a></li>
 					<li><a href="#">Terms of Use</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 				</ul>
@@ -233,7 +233,7 @@ session_start();
 				<ul>
 					<li><h3>Customer Service</h3></li>
 					<li><a href="#">Shipping Policy</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="accounts.php">My Account</a></li>
 					<li><a href="#">Return Policy</a></li>
 				</ul>
 			</div>

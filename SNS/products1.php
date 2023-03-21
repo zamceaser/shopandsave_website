@@ -9,13 +9,7 @@ session_start();
         $sql = "SELECT prod_id prod_cost, prod_name, prod_image FROM products";
         $result = mysqli_query($con, $sql);
 
-        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
-        //free result from memory
-        mysqli_free_result($result);
-
-        //close connection
-        mysqli_close($con);
+        
      
 
 
@@ -50,7 +44,7 @@ session_start();
 					
 				</div>
 				<ul class="nav">
-					<li class="active"> <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
+					<li> <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
 					<li> <a> <img src="Images/locate.png"/>Locations</a>
 						<div class="sub-menu">
 							<ul>
@@ -65,7 +59,7 @@ session_start();
 					<a href="index1.php"> <img src="Images/logo.png" alt="ShopandSave Logo"> </a>
 				</div>
 				<ul class="nav">
-                    <li> <a href="about1.php"><img src="Images/about.png"/> About Us </a></li>
+                    <li class="active"> <a href="about1.php"><img src="Images/about.png"/> About Us </a></li>
 					<li> <a><img src="Images/account.png" /><b>Hello, <?php echo $user_data['fname']; ?> </b></a>			
 						<div class="sub-menu">
 							<ul>
@@ -96,13 +90,23 @@ session_start();
                     
 				</ul>
                 <div class="cart">
-                        <a href="cart1.php"><img src="Images/cart.png"/> </a>
+                        <a href="cart1.php"><img src="Images/cart.png"/> <?php 
+                            if(isset($_SESSION['cart']))
+                            {
+                                $count = count($_SESSION['cart']);
+                                echo "<span id=\"cart_count\" class=\"cartt\">$count</span>";
+                            }else{
+                                echo "<span id=\"cart_count\"> 0 </span>";
+                            }
+                        ?></a>
                     </div>
-				<div class="search-box">
-					<input class="search-txt" type="text" name="" placeholder="Search for Groceries....."/>
-					<a class="search-btn" hrerf="#">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</a>
+				<div>
+					<form class="search-box" action="search.php" method="post">
+                        <input class="search-txt" type="text" name="search" placeholder="Search for Groceries....."/>
+                        <a class="search-btn" hrerf="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </form>
 				</div>
 			</div>
 		
@@ -116,24 +120,26 @@ session_start();
 					<li class="cate"><a href="#"><img src="Images/menu.png" alt="category menu icon"/></a>
                         <div class="cate-menu">
 							<ul>
-								<li> <a href="fresh1.php">Fresh Produce</a></li>
-								<li> <a href="froze1.php">Frozen</a></li>
-								<li> <a href="drinks1.php">Drinks</a></li>
-								<li> <a href="hygiene1.php">Hygiene</a></li>
-								<li> <a href="dairy1.php">Dairy</a></li>
-								<li> <a href="snack1.php">Snacks</a></li>
-								<li> <a href="homeware1.php">Homeware</a></li>
-								<li> <a href="dgoods1.php">Dried Goods</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 1;?>">Fresh Produce</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 2;?>">Frozen</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 3;?>">Drinks</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 4;?>">Hygiene</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 5;?>">Dairy</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 6;?>">Snacks</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 7;?>">Homeware</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 8;?>">Dried Goods</a></li>
 							</ul>
 						</div>
                     </li>
 					<li class="prod"><a href="products1.php">All Products</a></li>
 				</ul>
 				<div class="search-box2">
-					<input class="search-txt2" type="text" name="" placeholder="Search Shop and Save....."/>
-					<a class="search-btn2" href="#">
-						<i>Search</i>
-					</a>
+                    <form method="post" action="search.php">
+                        <input class="search-txt2" type="text" name="search" placeholder="Search Shop and Save....."/>
+					   <input type="submit" class="search-btn2" name="submit"value="Search" >
+					
+                    </form>
+					 
 				</div>
                 <div>
                     <ul class="wish">
@@ -157,7 +163,6 @@ session_start();
 			</div>
             
 	</div>
-
         
         
 	<!-------------Content---------------->
@@ -167,137 +172,24 @@ session_start();
                 <hr>
 				<h2> ALL PRODUCTS</h2>
                 <div class="mmore">
-                    <a href="filter.php">FILTER</a>
+                    <i class="fa-solid fa-filter"></i><a href="filter.php">&nbsp;&nbsp;&nbsp;FILTER</a>
                 </div>
-				<div class="row"> 
-					<div class="col-1" name="<?php=$product_id?>" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[0]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[0]['prod_name']; ?></h4>
-						<p>$<?php echo $row[0]['prod_cost']; ?> &nbsp;  <strike> $17.80 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[1]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[1]['prod_name']; ?></h4>
-						<p>$<?php echo $row[1]['prod_cost']; ?> &nbsp;  <strike> $3.30 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[2]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[2]['prod_name']; ?></h4>
-						<p>$<?php echo $row[2]['prod_cost']; ?> &nbsp;  <strike> $3.50 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[3]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[3]['prod_name']; ?></h4>
-						<p>$<?php echo $row[3]['prod_cost']; ?> &nbsp;  <strike> $1.70 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[4]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[4]['prod_name']; ?></h4>
-						<p>$<?php echo $row[4]['prod_cost']; ?> &nbsp;  <strike> $6.80 </strike>
-                        </p>
-					</div>
-                    <div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[5]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[5]['prod_name']; ?></h4>
-						<p>$<?php echo $row[5]['prod_cost']; ?> &nbsp;  <strike> $3.50 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[6]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[6]['prod_name']; ?></h4>
-						<p>$<?php echo $row[6]['prod_cost']; ?> &nbsp;  <strike> $4.50 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[7]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[7]['prod_name']; ?></h4>
-						<p>$<?php echo $row[7]['prod_cost']; ?> &nbsp;  <strike> $4.75 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[8]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[8]['prod_name']; ?></h4>
-						<p>$<?php echo $row[8]['prod_cost']; ?> &nbsp;  <strike> $23.45 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[9]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[9]['prod_name']; ?></h4>
-						<p>$<?php echo $row[9]['prod_cost']; ?> &nbsp;  <strike> $5.75 </strike>
-                        </p>
-					</div>
-                    <div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[10]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[10]['prod_name']; ?></h4>
-						<p>$<?php echo $row[10]['prod_cost']; ?></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[11]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[11]['prod_name']; ?></h4>
-						<p>$<?php echo $row[11]['prod_cost']; ?> </p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[12]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[12]['prod_name']; ?></h4>
-						<p>$<?php echo $row[12]['prod_cost']; ?> </p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[13]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[13]['prod_name']; ?></h4>
-						<p>$<?php echo $row[13]['prod_cost']; ?> </p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[14]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[14]['prod_name']; ?></h4>
-						<p>$<?php echo $row[14]['prod_cost']; ?> </p>
-					</div>
-                    <div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[15]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[15]['prod_name']; ?></h4>
-						<p>$<?php echo $row[15]['prod_cost']; ?> &nbsp;  <strike> $1.40 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[16]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[16]['prod_name']; ?></h4>
-						<p>$<?php echo $row[16]['prod_cost']; ?> &nbsp;  <strike> $2.22 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[17]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[17]['prod_name']; ?></h4>
-						<p>$<?php echo $row[17]['prod_cost']; ?></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[18]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[18]['prod_name']; ?></h4>
-						<p>$<?php echo $row[18]['prod_cost']; ?> &nbsp;  <strike> $3.00 </strike></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[19]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[19]['prod_name']; ?></h4>
-						<p>$$<?php echo $row[19]['prod_cost']; ?> &nbsp;  <strike> $16.80 </strike>
-                        </p>
-					</div>
-                    					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;" >
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[20]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[20]['prod_name']; ?></h4>
-						<p>$<?php echo $row[20]['prod_cost']; ?> </p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[21]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[21]['prod_name']; ?></h4>
-						<p>$<?php echo $row[21]['prod_cost']; ?></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[22]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[22]['prod_name']; ?></h4>
-						<p>$<?php echo $row[22]['prod_cost']; ?> </p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[23]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[23]['prod_name']; ?></h4>
-						<p>$<?php echo $row[23]['prod_cost']; ?></p>
-					</div>
-					<div class="col-1" onclick="location.href='item.php';" style="cursor: pointer;">
-						<?php echo '<img src="data:image;base64,'.base64_encode($row[24]['prod_image']).'" alt="Rooster Chicken #18">';?> 
-						<h4><?php echo $row[24]['prod_name']; ?></h4>
-						<p>$<?php echo $row[24]['prod_cost']; ?></p>
-					</div>
+				<div class="row">
+                    <?php 
+                    $i = 0;
+                    while($row = mysqli_fetch_assoc($result))
+                    {
+                      ?>
+                           <a class="col-1" href="item.php?product_id=<?php echo $i;?>" style="text-decoration:none;color:black;">
+                                <?php echo '<img src="data:image;base64,'.base64_encode($row['prod_image']).'" alt="Rooster Chicken #18">';?> 
+                                <h4><?php echo $row['prod_name']; ?></h4>
+                                <p>$<?php echo $row['prod_cost']; ?> &nbsp;  </p>
+                            </a>
+                        <?php
+                        $i = $i + 1;
+                       
+                        }
+                        ?>
                     
 				</div>
                 <div style="text-align: right; color:black;}">
@@ -308,6 +200,8 @@ session_start();
             
 
 		</div>
+        
+        <!--Frequently asked questions-->
         <div class="faq-direct">
             <h4>GOT QUERIES ABOUT SHOPPING ONLINE WITH US?</h4>
              <p>
@@ -315,7 +209,7 @@ session_start();
                  8am to 6pm Fiji Time, from Monday to Sunday on (679) 338 3400 or by simply dropping an email at <a href="mailto:info@shopnsave.com.fj">info@shopnsave.com.fj</a>
             </p>
             
-            <p class="more"> <a  href="#">Frequently Asked Questions</a> </p>
+            <p class="more"> <a  href="faq1.php">Frequently Asked Questions</a> </p>
        </div>
         
 	</div>
@@ -335,7 +229,7 @@ session_start();
 			<div class="col2">
 				<ul>
 					<li><h3>About Market</h3></li>
-					<li><a href="#">About Us</a></li>
+					<li><a href="about.php">About Us</a></li>
 					<li><a href="#">Terms of Use</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 				</ul>
@@ -344,7 +238,7 @@ session_start();
 				<ul>
 					<li><h3>Customer Service</h3></li>
 					<li><a href="#">Shipping Policy</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="accounts.php">My Account</a></li>
 					<li><a href="#">Return Policy</a></li>
 				</ul>
 			</div>

@@ -50,7 +50,7 @@ session_start();
 					
 				</div>
 				<ul class="nav">
-					<li class="active"> <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
+					<li> <a href="index1.php"> <img src="Images/home.png"/> Home </a></li>
 					<li> <a> <img src="Images/locate.png"/>Locations</a>
 						<div class="sub-menu">
 							<ul>
@@ -65,7 +65,7 @@ session_start();
 					<a href="index1.php"> <img src="Images/logo.png" alt="ShopandSave Logo"> </a>
 				</div>
 				<ul class="nav">
-                    <li> <a href="about1.php"><img src="Images/about.png"/> About Us </a></li>
+                    <li class="active"> <a href="about1.php"><img src="Images/about.png"/> About Us </a></li>
 					<li> <a><img src="Images/account.png" /><b>Hello, <?php echo $user_data['fname']; ?> </b></a>			
 						<div class="sub-menu">
 							<ul>
@@ -96,13 +96,23 @@ session_start();
                     
 				</ul>
                 <div class="cart">
-                        <a href="cart1.php"><img src="Images/cart.png"/> </a>
+                        <a href="cart1.php"><img src="Images/cart.png"/> <?php 
+                            if(isset($_SESSION['cart']))
+                            {
+                                $count = count($_SESSION['cart']);
+                                echo "<span id=\"cart_count\" class=\"cartt\">$count</span>";
+                            }else{
+                                echo "<span id=\"cart_count\"> 0 </span>";
+                            }
+                        ?></a>
                     </div>
-				<div class="search-box">
-					<input class="search-txt" type="text" name="" placeholder="Search for Groceries....."/>
-					<a class="search-btn" hrerf="#">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</a>
+				<div>
+					<form class="search-box" action="search.php" method="post">
+                        <input class="search-txt" type="text" name="search" placeholder="Search for Groceries....."/>
+                        <a class="search-btn" hrerf="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </form>
 				</div>
 			</div>
 		
@@ -116,24 +126,26 @@ session_start();
 					<li class="cate"><a href="#"><img src="Images/menu.png" alt="category menu icon"/></a>
                         <div class="cate-menu">
 							<ul>
-								<li> <a href="fresh1.php">Fresh Produce</a></li>
-								<li> <a href="froze1.php">Frozen</a></li>
-								<li> <a href="drinks1.php">Drinks</a></li>
-								<li> <a href="hygiene1.php">Hygiene</a></li>
-								<li> <a href="dairy1.php">Dairy</a></li>
-								<li> <a href="snack1.php">Snacks</a></li>
-								<li> <a href="homeware1.php">Homeware</a></li>
-								<li> <a href="dgoods1.php">Dried Goods</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 1;?>">Fresh Produce</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 2;?>">Frozen</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 3;?>">Drinks</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 4;?>">Hygiene</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 5;?>">Dairy</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 6;?>">Snacks</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 7;?>">Homeware</a></li>
+								<li> <a href="categories1.php?cat_id=<?php echo 8;?>">Dried Goods</a></li>
 							</ul>
 						</div>
                     </li>
 					<li class="prod"><a href="products1.php">All Products</a></li>
 				</ul>
 				<div class="search-box2">
-					<input class="search-txt2" type="text" name="" placeholder="Search Shop and Save....."/>
-					<a class="search-btn2" href="#">
-						<i>Search</i>
-					</a>
+                    <form method="post" action="search.php">
+                        <input class="search-txt2" type="text" name="search" placeholder="Search Shop and Save....."/>
+					   <input type="submit" class="search-btn2" name="submit"value="Search" >
+					
+                    </form>
+					 
 				</div>
                 <div>
                     <ul class="wish">
@@ -249,7 +261,7 @@ session_start();
                  8am to 6pm Fiji Time, from Monday to Sunday on (679) 338 3400 or by simply dropping an email at <a href="mailto:info@shopnsave.com.fj">info@shopnsave.com.fj</a>
             </p>
             
-            <p class="more"> <a  href="#">Frequently Asked Questions</a> </p>
+            <p class="more"> <a  href="faq1.php">Frequently Asked Questions</a> </p>
        </div>
         
 	</div>
@@ -269,7 +281,7 @@ session_start();
 			<div class="col2">
 				<ul>
 					<li><h3>About Market</h3></li>
-					<li><a href="#">About Us</a></li>
+					<li><a href="about1.php">About Us</a></li>
 					<li><a href="#">Terms of Use</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 				</ul>
@@ -278,7 +290,7 @@ session_start();
 				<ul>
 					<li><h3>Customer Service</h3></li>
 					<li><a href="#">Shipping Policy</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="accounts.php">My Account</a></li>
 					<li><a href="#">Return Policy</a></li>
 				</ul>
 			</div>

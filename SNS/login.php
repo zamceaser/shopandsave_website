@@ -29,15 +29,18 @@
                     if($user_data['cust_pass'] === $cust_pass)
                     {
                         $_SESSION['user_id'] = $user_data['user_id'];
-                        header("Location: index1.php");
+                            echo "<script> alert('Logged in Successfully') </script>";
+                            echo "<script> window.location = 'index1.php' </script>";
                         die;
                     }
                 }
             }
             
-            echo "Email or Password is invalid"; 
+            echo "<script> alert('Email or Password is invalid') </script>"; 
+            echo "<script> window.location = 'log.html' </script>";
         }else
-            echo "Email or Password is invalid";
+            echo "<script> alert('Email or Password is invalid') </script>"; 
+            echo "<script> window.location = 'log.html' </script>";
     }
 
   ?>

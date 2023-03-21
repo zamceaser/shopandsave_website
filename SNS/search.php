@@ -1,7 +1,12 @@
 
 <?php
+    session_start();
 
-include("connection.php");
+    include("connection.php");
+    
+    $find = $_POST['search'];
+    $sql = "SELECT * FROM products WHERE prod_name LIKE '%$find%'";
+    $result = mysqli_query($con, $sql);
 
 ?>
 
@@ -26,7 +31,7 @@ include("connection.php");
 
 	<body>
 	<!-------------Header---------------->
-	<div class="header">
+<div class="header">
 			
 			<div class="top-header">
 				<div class="social-link">
@@ -35,7 +40,7 @@ include("connection.php");
 					
 				</div>
 				<ul class="nav">
-					<li class="active"> <a href="index.php"> <img src="Images/home.png"/> Home </a></li>
+					<li> <a href="index.php"> <img src="Images/home.png"/> Home </a></li>
 					<li> <a> <img src="Images/locate.png"/>Locations</a>
 						<div class="sub-menu">
 							<ul>
@@ -148,13 +153,24 @@ include("connection.php");
                     
 				</ul>
                 <div class="cart">
-                        <a href="cart.php"><img src="Images/cart.png"/> </a>
+                        <a href="cart.php"><img src="Images/cart.png"/>
+                        <?php 
+                            if(isset($_SESSION['cart']))
+                            {
+                                $count = count($_SESSION['cart']);
+                                echo "<span id=\"cart_count\" class=\"cartt\">$count</span>";
+                            }else{
+                                echo "<span id=\"cart_count\"> 0 </span>";
+                            }
+                        ?> </a>
                     </div>
-				<div class="search-box">
-					<input class="search-txt" type="text" name="" placeholder="Search for Groceries....."/>
-					<a class="search-btn" hrerf="#">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</a>
+				<div>
+					<form class="search-box" action="search.php" method="post">
+                        <input class="search-txt" type="text" name="search" placeholder="Search for Groceries....."/>
+                        <a class="search-btn" hrerf="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </form>
 				</div>
 			</div>
 		
@@ -168,14 +184,14 @@ include("connection.php");
 					<li class="cate"><a href="#"><img src="Images/menu.png" alt="category menu icon"/></a>
                         <div class="cate-menu">
 							<ul>
-								<li> <a href="fresh.php">Fresh Produce</a></li>
-								<li> <a href="froze.php">Frozen</a></li>
-								<li> <a href="drinks.php">Drinks</a></li>
-								<li> <a href="hygiene.php">Hygiene</a></li>
-								<li> <a href="dairy.php">Dairy</a></li>
-								<li> <a href="snack.php">Snacks</a></li>
-								<li> <a href="homeware.php">Homeware</a></li>
-								<li> <a href="dgoods.php">Dried Goods</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 1;?>">Fresh Produce</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 2;?>">Frozen</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 3;?>">Drinks</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 4;?>">Hygiene</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 5;?>">Dairy</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 6;?>">Snacks</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 7;?>">Homeware</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 8;?>">Dried Goods</a></li>
 							</ul>
 						</div>
                     </li>
@@ -183,11 +199,11 @@ include("connection.php");
 				</ul>
 				<div class="search-box2">
                     <form method="post" action="search.php">
-                        <input class="search-txt2" type="text" name="string" placeholder="Search Shop and Save....."/>
+                        <input class="search-txt2" type="text" name="search" placeholder="Search Shop and Save....."/>
 					   <input type="submit" class="search-btn2" name="submit"value="Search" >
 					
                     </form>
-					
+					 
 				</div>
                 <div>
                     <ul class="wish">
@@ -210,51 +226,45 @@ include("connection.php");
                 
 			</div>
             
-	</div>
+	</div> 
 
         
         
-	<!-------------Content---------------->
-
-        
-<?php
-
-    
-    if(isset($_POST["submit"])){
-        $str = $_POST["search"];
-        $sth = $con->prepare("select * from 'products' where prod_name = '$str'");
-        
-        $sth->setFetchMode(PDO:: FETCH_OBJ);
-        $sth->execute();
-        
-        if($row = $sth->fetch())
-        {
-            ?>
-        <br><br><br><br><br><br><br>
-        <h3> Results Found   </h3>
-       
-        
-    <?php   
-        }
-        
-        else{
-            echo "Name Does Not exist";
-        }
-    }
-
-
-
-
-        
-        
-        
-        
+	<!-------------Content---------------->     
+        <div class="content2">
+			<div class="small-container">
+                <hr>
+				<h2> Search Results for "<?php echo $find;?>"</h2>
+                
+				<div class="row">
+                    <?php 
+                     $tot = 0;
+                    while($row = mysqli_fetch_assoc($result))
+                    {$i = $row['prod_id'];
+                     $i = $i - 1;
+                     
+                    
+                      ?>
+                           <a class="col-1" href="item.php?product_id=<?php echo $i;?>" style="text-decoration:none;color:black;">
+                                <?php echo '<img src="data:image;base64,'.base64_encode($row['prod_image']).'" alt="Rooster Chicken #18">';?> 
+                                <h4><?php echo $row['prod_name']; ?></h4>
+                                <p>$<?php echo $row['prod_cost']; ?> &nbsp;  </p>
+                            </a>
+                        
+                        <?php
+                       $tot = $tot + 1;
+                        }
+                        ?>
+                    
+				</div>
+                
+                <p><br><br><?php echo $tot ?> Result(s) Found</p>
+			</div>
+            
+            <br><br><br><br><br><br><br><br><br><br>
+		</div>
         
         
-        
-        
-        
-      <?  
         
         
         
@@ -273,7 +283,7 @@ include("connection.php");
 			<div class="col2">
 				<ul>
 					<li><h3>About Market</h3></li>
-					<li><a href="#">About Us</a></li>
+					<li><a href="about.php">About Us</a></li>
 					<li><a href="#">Terms of Use</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 				</ul>
@@ -282,7 +292,7 @@ include("connection.php");
 				<ul>
 					<li><h3>Customer Service</h3></li>
 					<li><a href="#">Shipping Policy</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="log.html">My Account</a></li>
 					<li><a href="#">Return Policy</a></li>
 				</ul>
 			</div>

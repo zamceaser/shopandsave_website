@@ -78,7 +78,7 @@ body{
 .top-header .active, .top-header ul li:hover{
 	color: red;
 	background-color:#ffe151;
-	border-radius: 2px;
+	border-radius: 20px;
 }
 
 
@@ -107,7 +107,6 @@ body{
 }
 
 .top-header ul li a:hover .sub-menu ul{
-	display: block;
     background-color:#FFDB58;
     
 }
@@ -119,6 +118,7 @@ body{
 	border-bottom: 1px dotted black;
 	background-color: transparent;
     text-align: left;
+    border-radius: 0px;
     
 }
 .top-header ul li:hover .sub-menu ul li:last-child{
@@ -153,6 +153,17 @@ body{
     height: 30px;
     margin-top: 25px;
 }
+#cart_count{
+    font-size: 13px;
+    text-align: center;
+    padding: 0 0.5rem 0rem 0.5rem;
+    border-radius: 4rem;
+    color: white;
+    background-color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 
 .search-box{
 	padding-top: 58px;
@@ -470,7 +481,6 @@ hr {
 
 
 
-
 /******************* Bottom Header **********************************/
 .bottom-header{
 	background-color:#024FA1;
@@ -731,7 +741,13 @@ hr {
     text-decoration: none;
 }
 
-
+/*Know MORE page*/
+.findout{
+    max-width: 1200px;
+    align-items: center;
+    margin-left: 350px;
+    margin-top: 70px;
+}
 
 /****************products display*******************/
 .content2{
@@ -812,8 +828,51 @@ hr {
     text-decoration: none;
 }
 
+/*       products details          */
+.column1 .selectt input{
+    width: 70px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    border: 1px solid grey;
+    margin-top:30px
+}
+.thebut{
+    background: maroon;
+    color: white;
+    padding: 10px 40px;
+    margin:30px 10px 60px 0px;
+    border-radius: 20px;
+    transition: background 0.5s;
+    cursor: pointer;
+}
+..thebut:hover{
+    background: red;
+    color: black;
+}
 
 
+/*ABOUT PAGE*/
+/* Create two equal columns that floats next to each other */
+.pack{
+  max-width: 1200px;
+  align-items: center;
+  margin-left: 350px;
+}
+.column1 {
+  float: left;
+  width: 50%;
+  align-content: center;
+}
+/* Clear floats after the columns */
+.row1:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+    
+    
+    
 
 /*location pages*/
 .locate{
@@ -828,8 +887,94 @@ hr {
     
 }
 
+.proddata{
+    width: 100%;
+}
+
 .mapp {
    margin-bottom: 80px;
+}
+
+.produce{
+ 	flex-basis: 18%;
+	min-width: 150px;
+	margin-bottom: 30px;
+}
+.produce img{
+	width: 40%;
+}
+
+.produce:hover {
+    font-size: 15px;
+    padding:10px;
+}
+
+
+
+/*cart*/
+.thecart{
+    max-width: 1200px;
+    margin-left: 350px;
+    margin-top: 80px;
+}
+
+.thecart table td{
+    width:13%;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}.thecart table td img{
+    width:70px;
+    
+}
+.thecart table tr{
+    padding-bottom: 10px;
+
+}
+.thecart .quant{
+    width: 70px;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 20px;
+    border: 1px solid grey;
+}.content .quant{
+    width: 70px;
+    height: 40px;
+    padding-left: 20px;
+    font-size: 20px;
+    border: 1px solid grey;
+}
+.thecart .update{
+    width: 70px;
+    height: 30px;
+    font-size: 12px;
+    background-color: darkcyan;
+    color: white;
+    padding: 0 10px;
+    margin:5px 0 0 0px;
+    transition: background 0.5s;
+    cursor: pointer;
+    text-align: center;
+}
+.thebut2{
+    background: red;
+    color: white;
+    padding: 10px 30px;
+    margin:50px 10px 60px 0px;
+    border-radius: 10px;
+    transition: background 0.5s;
+    cursor: pointer;
+}
+.thebut3{
+    align-items: center;
+    background-color: darkblue;
+    color: white;
+    padding: 10px 30px;
+    margin:50px 10px 60px 0px;
+    border-radius: 5px;
+    transition: background 0.5s;
+    cursor: pointer;
 }
 /************************************* Footer *****************************************/
 .top-footer{

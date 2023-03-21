@@ -1,5 +1,5 @@
 <?php 
-
+    session_start();
     include("connection.php");
     $sql = "SELECT * FROM products";
     $result = mysqli_query($con, $sql);
@@ -43,7 +43,7 @@
 					
 				</div>
 				<ul class="nav">
-					<li class="active"> <a href="index.php"> <img src="Images/home.png"/> Home </a></li>
+					<li> <a href="index.php"> <img src="Images/home.png"/> Home </a></li>
 					<li> <a> <img src="Images/locate.png"/>Locations</a>
 						<div class="sub-menu">
 							<ul>
@@ -58,7 +58,7 @@
 					<a href="index.php"> <img src="Images/logo.png" alt="ShopandSave Logo"> </a>
 				</div>
 				<ul class="nav">
-                    <li> <a href="cart.php"><img src="Images/about.png"/> About Us </a></li>
+                    <li> <a href="about.php"><img src="Images/about.png"/> About Us </a></li>
 					<li> <a href="reg.html"><img src="Images/user.png" />Accounts </a>			
 						<div class="sub-menu">
 							<ul>
@@ -156,13 +156,23 @@
                     
 				</ul>
                 <div class="cart">
-                        <a href="cart.php"><img src="Images/cart.png"/> </a>
+                        <a href="cart.php"><img src="Images/cart.png"/> <?php 
+                            if(isset($_SESSION['cart']))
+                            {
+                                $count = count($_SESSION['cart']);
+                                echo "<span id=\"cart_count\" class=\"cartt\">$count</span>";
+                            }else{
+                                echo "<span id=\"cart_count\"> 0 </span>";
+                            }
+                        ?></a>
                     </div>
-				<div class="search-box">
-					<input class="search-txt" type="text" name="" placeholder="Search for Groceries....."/>
-					<a class="search-btn" hrerf="#">
-						<i class="fa-solid fa-magnifying-glass"></i>
-					</a>
+				<div>
+					<form class="search-box" action="search.php" method="post">
+                        <input class="search-txt" type="text" name="search" placeholder="Search for Groceries....."/>
+                        <a class="search-btn" hrerf="#">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </a>
+                    </form>
 				</div>
 			</div>
 		
@@ -176,24 +186,26 @@
 					<li class="cate"><a href="#"><img src="Images/menu.png" alt="category menu icon"/></a>
                         <div class="cate-menu">
 							<ul>
-								<li> <a href="fresh.php">Fresh Produce</a></li>
-								<li> <a href="froze.php">Frozen</a></li>
-								<li> <a href="drinks.php">Drinks</a></li>
-								<li> <a href="hygiene.php">Hygiene</a></li>
-								<li> <a href="dairy.php">Dairy</a></li>
-								<li> <a href="snack.php">Snacks</a></li>
-								<li> <a href="homeware.php">Homeware</a></li>
-								<li> <a href="dgoods.php">Dried Goods</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 1;?>">Fresh Produce</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 2;?>">Frozen</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 3;?>">Drinks</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 4;?>">Hygiene</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 5;?>">Dairy</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 6;?>">Snacks</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 7;?>">Homeware</a></li>
+								<li> <a href="categories.php?cat_id=<?php echo 8;?>">Dried Goods</a></li>
 							</ul>
 						</div>
                     </li>
 					<li class="prod"><a href="products.php">All Products</a></li>
 				</ul>
 				<div class="search-box2">
-					<input class="search-txt2" type="text" name="" placeholder="Search Shop and Save....."/>
-					<a class="search-btn2" href="#">
-						<i>Search</i>
-					</a>
+                    <form method="post" action="search.php">
+                        <input class="search-txt2" type="text" name="search" placeholder="Search Shop and Save....."/>
+					   <input type="submit" class="search-btn2" name="submit"value="Search" >
+					
+                    </form>
+					 
 				</div>
                 <div>
                     <ul class="wish">
@@ -299,7 +311,7 @@
                  8am to 6pm Fiji Time, from Monday to Sunday on (679) 338 3400 or by simply dropping an email at <a href="mailto:info@shopnsave.com.fj">info@shopnsave.com.fj</a>
             </p>
             
-            <p class="more"> <a  href="#">Frequently Asked Questions</a> </p>
+            <p class="more"> <a  href="faq.php">Frequently Asked Questions</a> </p>
        </div>
         
 	</div>
@@ -320,7 +332,7 @@
 			<div class="col2">
 				<ul>
 					<li><h3>About Market</h3></li>
-					<li><a href="#">About Us</a></li>
+					<li><a href="about.php">About Us</a></li>
 					<li><a href="#">Terms of Use</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 				</ul>
@@ -329,7 +341,7 @@
 				<ul>
 					<li><h3>Customer Service</h3></li>
 					<li><a href="#">Shipping Policy</a></li>
-					<li><a href="#">My Account</a></li>
+					<li><a href="log.html">My Account</a></li>
 					<li><a href="#">Return Policy</a></li>
 				</ul>
 			</div>
