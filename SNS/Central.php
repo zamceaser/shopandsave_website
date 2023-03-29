@@ -63,10 +63,7 @@
 						<div class="sub-menu">
 							<ul>
 								<li> <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;cursor: pointer;">Log In</a>
-                                
-
                                     <div id="id01" class="modal">
-
                                       <form class="modal-content animate" action="login.php" method="post">
                                         <div class="imgcontainer">
                                           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -93,7 +90,6 @@
                                       </form>
                                     </div>
                                 </li>
-                                
 								<li> <a onclick="document.getElementById('id02').style.display='block'" style="width:auto;cursor: pointer;">Sign Up</a>
                                     
                                     <div id="id02" class="modal1">

@@ -6,8 +6,6 @@
     include("functions.php");
 
     $user_data = check_login($con);
-
-
 ?>
 
 <html>
@@ -47,7 +45,7 @@
                     <p>
                         Hello! This is a forked snippet.<br>
                         
-                        <b>WEBPAGE IS STILL UNDER DEVELOPMENT!!</b>
+                        <b>Admin Page IS STILL UNDER DEVELOPMENT!!</b>
                     </p>
                     <p>
                         Website is designed and developed  by <a href="https://www.instagram.com/zamceaser/?hl=en" target="_BLANK">Semi Ravitisai</a>
