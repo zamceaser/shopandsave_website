@@ -27,7 +27,7 @@
         <div class="container">
             
             <div>
-                <h1> Welcome Back, <?php echo $user_data['fname']; ?></h1>
+                <h1> Welcome Back <?php echo $user_data['fname']; ?></h1>
             </div>
             <div class="row">
                 <div class="col-md-3">
